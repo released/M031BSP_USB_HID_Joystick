@@ -60,6 +60,55 @@ update @ 2026/03/18
 #define HID_JOYSTICK_GPIO_START_PIN                 11U
 ```
 
+```c
+/*
+ * Active mapping profile:
+ * - LEFT : output left-half mapping only
+ * - RIGHT: output right-half mapping only
+ * - BOTH : merge left+right outputs (DPAD/Buttons are OR-combined)
+ */
+#define HID_JOYSTICK_MAP_PROFILE_LEFT               0U
+#define HID_JOYSTICK_MAP_PROFILE_RIGHT              1U
+#define HID_JOYSTICK_MAP_PROFILE_BOTH               2U
+#define HID_JOYSTICK_ACTIVE_MAP_PROFILE             HID_JOYSTICK_MAP_PROFILE_BOTH
+```
+
+
+as for ADC pin assignment : 
+
+L3 X-AXIS , Y-AXIS
+
+```
+        L3      - X-AXIS    - PB7 (ADC0_CH7)
+        L3      - Y-AXIS    - PB6 (ADC0_CH6)
+```
+
+R3 X-AXIS , Y-AXIS , need to modify button GPIO , base on actual design
+
+```c
+        R3      - X-AXIS    - PB7 (ADC0_CH7)
+        R3      - Y-AXIS    - PB6 (ADC0_CH6)
+
+```
+
+under Task_10ms_Callback , use PB7 , PB6 to test left side / right side tool behavior
+
+need to modify actual ADC pin , base on actual design
+
+```c
+    #if 0   // attach adc value
+    // u16Z = adc_measure[AXIS_Z].data;
+    u16Z = 4095 - adc_measure[AXIS_X].data;
+    u16Rz = adc_measure[AXIS_Rz].data;
+    // u16Rz = 4095 - adc_measure[AXIS_Y].data;
+    #else   // for test
+    // u16Z = adc_measure[AXIS_X].data;
+    u16Z = 4095 - adc_measure[AXIS_X].data; // axis reverse
+    u16Rz = adc_measure[AXIS_Y].data;
+    // u16Rz = 4095 - adc_measure[AXIS_Y].data; // axis reverse
+    #endif
+```
+
 5. use joystick shield with M032 EVB , to test HID joystick behavior
 
 
