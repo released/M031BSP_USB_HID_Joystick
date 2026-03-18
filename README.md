@@ -60,19 +60,6 @@ update @ 2026/03/18
 #define HID_JOYSTICK_GPIO_START_PIN                 11U
 ```
 
-```c
-/*
- * Active mapping profile:
- * - LEFT : output left-half mapping only
- * - RIGHT: output right-half mapping only
- * - BOTH : merge left+right outputs (DPAD/Buttons are OR-combined)
- */
-#define HID_JOYSTICK_MAP_PROFILE_LEFT               0U
-#define HID_JOYSTICK_MAP_PROFILE_RIGHT              1U
-#define HID_JOYSTICK_MAP_PROFILE_BOTH               2U
-#define HID_JOYSTICK_ACTIVE_MAP_PROFILE             HID_JOYSTICK_MAP_PROFILE_BOTH
-```
-
 
 as for ADC pin assignment : 
 
@@ -108,6 +95,23 @@ need to modify actual ADC pin , base on actual design
     // u16Rz = 4095 - adc_measure[AXIS_Y].data; // axis reverse
     #endif
 ```
+
+use below define , to enable test LEFT side , RIGHT side , or both SIDE of JoyStickTestTool.exe
+
+```c
+/*
+ * Active mapping profile:
+ * - LEFT : output left-half mapping only
+ * - RIGHT: output right-half mapping only
+ * - BOTH : merge left+right outputs (DPAD/Buttons are OR-combined)
+ */
+#define HID_JOYSTICK_MAP_PROFILE_LEFT               0U
+#define HID_JOYSTICK_MAP_PROFILE_RIGHT              1U
+#define HID_JOYSTICK_MAP_PROFILE_BOTH               2U
+#define HID_JOYSTICK_ACTIVE_MAP_PROFILE             HID_JOYSTICK_MAP_PROFILE_BOTH
+```
+
+
 
 5. use joystick shield with M032 EVB , to test HID joystick behavior
 
