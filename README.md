@@ -197,8 +197,8 @@ void HID_SetInReport(void)
 
 below is video 
 
+\JoyStickTestTool\operation.mp4
 
-![image](https://github.com/released/M031BSP_USB_HID_Joystick/blob/main/operation.mp4) 
 
 
 8. below is test log 
